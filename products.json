@@ -1,0 +1,416 @@
+[
+  {
+    "id": 1,
+    "name": "Bathroom Bliss Set",
+    "price": 649,
+    "description": "Eco Friendly Bathroom Essentials Gift Set – Brown Living",
+    "category": "Bathroom Essentials",
+    "image_url": "/media/img/Bathroom essentials/Bathroom Bliss Set  Eco Friendly Bathroom Essentials Gift Set – Brown Living price 649.jfif",
+    "stock": 19
+  },
+  {
+    "id": 2,
+    "name": "Bathroom Essentials Set",
+    "price": 1999,
+    "description": "High-quality curated bathroom essentials set for your home and lifestyle.",
+    "category": "Bathroom Essentials",
+    "image_url": "/media/img/Bathroom essentials/Bathroom Essentials Set price 1999.jfif",
+    "stock": 23
+  },
+  {
+    "id": 3,
+    "name": "Blue Sancha Cotton Pile Hand Towel",
+    "price": 259,
+    "description": "High-quality curated blue sancha cotton pile hand towel for your home and lifestyle.",
+    "category": "Bathroom Essentials",
+    "image_url": "/media/img/Bathroom essentials/Blue Sancha Cotton Pile Hand Towel price 259.jfif",
+    "stock": 16
+  },
+  {
+    "id": 4,
+    "name": "GORILLA GRIP Bath Rug Mat 48x24",
+    "price": 459,
+    "description": "Soft Absorbent Chenille, Quick Dry Microfiber Mats",
+    "category": "Bathroom Essentials",
+    "image_url": "/media/img/Bathroom essentials/Buy GORILLA GRIP Bath Rug Mat 48x24, Soft Absorbent Chenille, Quick Dry Microfiber Mats price 459.jfif",
+    "stock": 8
+  },
+  {
+    "id": 5,
+    "name": "Premium Cotton Towels Online in India Set of 5",
+    "price": 499,
+    "description": "High-quality curated premium cotton towels online in india set of 5 for your home and lifestyle.",
+    "category": "Bathroom Essentials",
+    "image_url": "/media/img/Bathroom essentials/Buy Premium Cotton Towels Online in India Set of 5 price 499.jfif",
+    "stock": 13
+  },
+  {
+    "id": 6,
+    "name": "Market99 Bathroom",
+    "price": 2199,
+    "description": "Stylish White Bathroom Set 6 Pcs Bath Accessories, Bathroom Set",
+    "category": "Bathroom Essentials",
+    "image_url": "/media/img/Bathroom essentials/Market99 Bathroom - Stylish White Bathroom Set 6 Pcs Bath Accessories, Bathroom Set price 2199.jfif",
+    "stock": 8
+  },
+  {
+    "id": 7,
+    "name": "Saral Home Aqua & White Cotton 1416 GSM Bath Mats",
+    "price": 599,
+    "description": "Set of 2",
+    "category": "Bathroom Essentials",
+    "image_url": "/media/img/Bathroom essentials/Saral Home Aqua & White Cotton 1416 GSM Bath Mats - Set of 2 price 599.jfif",
+    "stock": 6
+  },
+  {
+    "id": 8,
+    "name": "BH Modern Bedroom Set with Bed",
+    "price": 84665,
+    "description": "3-Door Wardrobe, Side Table, and Dressing Table",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/BH Modern Bedroom Set with Bed, 3-Door Wardrobe, Side Table, and Dressing Table price 84665.jfif",
+    "stock": 15
+  },
+  {
+    "id": 9,
+    "name": "Braided Dustbin Grey",
+    "price": 2699,
+    "description": "High-quality curated braided dustbin grey for your home and lifestyle.",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Braided Dustbin Grey price 2699.jfif",
+    "stock": 19
+  },
+  {
+    "id": 10,
+    "name": "Euro Solid Sheesham Wood Standing Mirror",
+    "price": 13273,
+    "description": "3 Years Warranty Natural",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Euro Solid Sheesham Wood Standing Mirror - 3 Years Warranty - Natural price 13273.jfif",
+    "stock": 12
+  },
+  {
+    "id": 11,
+    "name": "European Velvet Curtains",
+    "price": 1598,
+    "description": "4X7",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Europian Velvet Curtains - 4X7 price 1598.jfif",
+    "stock": 16
+  },
+  {
+    "id": 12,
+    "name": "Home Ecstasy Geometric Green 140 TC Cotton",
+    "price": 699,
+    "description": "High-quality curated home ecstasy geometric green 140 tc cotton for your home and lifestyle.",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Home Ecstasy Geometric Green 140 TC Cotton Double Bedsheet with 2 Pillow Cover price 699.jfif",
+    "stock": 18
+  },
+  {
+    "id": 13,
+    "name": "Jaypore Multicolour Cotton Bedsheet by Jaypore",
+    "price": 5499,
+    "description": "High-quality curated jaypore multicolour cotton bedsheet by jaypore for your home and lifestyle.",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Jaypore Multicolour Cotton Bedsheet by Jaypore price 5499.jfif",
+    "stock": 18
+  },
+  {
+    "id": 14,
+    "name": "Mia Solid Sheesham Wood Bedside Tables Honey",
+    "price": 11000,
+    "description": "High-quality curated mia solid sheesham wood bedside tables honey for your home and lifestyle.",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Mia Solid Sheesham Wood Bedside Tables Honeyprice 11000.jfif",
+    "stock": 11
+  },
+  {
+    "id": 15,
+    "name": "Minicoy Bedside Table",
+    "price": 11049,
+    "description": "High-quality curated minicoy bedside table for your home and lifestyle.",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Minicoy Bedside Table price 11049.jfif",
+    "stock": 23
+  },
+  {
+    "id": 16,
+    "name": "Printed Flat Bedsheets Online Soft Cotton",
+    "price": 1090,
+    "description": "Trance Home Linen King Flat (108 x 108)",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Printed Flat Bedsheets Online Soft Cotton Bed Sheets  Trance Home Linen King Flat (108 x 108) price 1090.jfif",
+    "stock": 15
+  },
+  {
+    "id": 17,
+    "name": "Set of 3 Full Length Wall Mirrors for Living",
+    "price": 12999,
+    "description": "Modern Decor",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Set of 3 Full Length Wall Mirrors for Living Room & Bedroom  Modern Decor price 12999.jfif",
+    "stock": 14
+  },
+  {
+    "id": 18,
+    "name": "Brass Antique Curved Floor Lamp with Table Shelf",
+    "price": 7456,
+    "description": "High-quality curated brass antique curved floor lamp with table shelf for your home and lifestyle.",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Shop Brass Antique Curved Floor Lamp with Table Shelf  price 7456.jfif",
+    "stock": 12
+  },
+  {
+    "id": 19,
+    "name": "StoryatHome Blackout Curtain, Green Curtains, Door",
+    "price": 1549,
+    "description": "Long Door Window Curtain, Room Curatin",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/StoryatHome Blackout Curtain, Green Curtains, Door - Long Door - Window Curtain, Room Curatin price 1549.jfif",
+    "stock": 19
+  },
+  {
+    "id": 20,
+    "name": "UW-9116 PERSIA BEDROOM SET",
+    "price": 24000,
+    "description": "High-quality curated uw-9116 persia bedroom set for your home and lifestyle.",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/UW-9116 PERSIA BEDROOM SET price 24000.jfif",
+    "stock": 15
+  },
+  {
+    "id": 21,
+    "name": "Venetian Mirror VD-788 Size",
+    "price": 2850,
+    "description": "42 x 26 Inches",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/Venetian Mirror VD-788 Size - 42 x 26 Inches price 2850.jfif",
+    "stock": 13
+  },
+  {
+    "id": 22,
+    "name": "WOODLAB Furniture Solid Sheesham Wood Panel",
+    "price": 14900,
+    "description": "Honey Finish Amazon.in Home & Kitchen",
+    "category": "Bedroom Essentials",
+    "image_url": "/media/img/Bedroom essentials/WOODLAB Furniture Solid Sheesham Wood Panel King Size Double Bed Without Storage for Bedroom Home Wooden Cot Beds Palang for Living Room Hotels - Honey Finish Amazon.in Home & Kitchen price 14900.jfif",
+    "stock": 23
+  },
+  {
+    "id": 23,
+    "name": "Aayam Round 4 Seater Dining Table Set with",
+    "price": 19333,
+    "description": "High-quality curated aayam round 4 seater dining table set with for your home and lifestyle.",
+    "category": "Furniture",
+    "image_url": "/media/img/Furniture/Aayam Round 4 Seater Dining Table Set with Marble Top Table price 19333.jfif",
+    "stock": 10
+  },
+  {
+    "id": 24,
+    "name": "AS Furniture Sofa Set with Center Table for",
+    "price": 32999,
+    "description": "Solid Sheesham Wood Sof",
+    "category": "Furniture",
+    "image_url": "/media/img/Furniture/AS Furniture Sofa Set with Center Table for Living Room 6 Seater Sofa Set  Solid Sheesham Wood Sof price 32999.jfif",
+    "stock": 14
+  },
+  {
+    "id": 25,
+    "name": "Cohoon Sheesham Wood 4 Seater Dining Set",
+    "price": 47889,
+    "description": "High-quality curated cohoon sheesham wood 4 seater dining set for your home and lifestyle.",
+    "category": "Furniture",
+    "image_url": "/media/img/Furniture/Cohoon Sheesham Wood 4 Seater Dining Set With Cushioned Chairs (Honey Finish)  price 47889.jfif",
+    "stock": 10
+  },
+  {
+    "id": 26,
+    "name": "Devoko Outdoor Rope 4-Seater Sofa Set with",
+    "price": 31175,
+    "description": "High-quality curated devoko outdoor rope 4-seater sofa set with for your home and lifestyle.",
+    "category": "Furniture",
+    "image_url": "/media/img/Furniture/Devoko Outdoor Rope 4-Seater Sofa Set with Glass Top Table price 31175.jfif",
+    "stock": 8
+  },
+  {
+    "id": 27,
+    "name": "dining table set",
+    "price": 21999,
+    "description": "Buy wooden 4 seater dining table furniture online Medium Walnut",
+    "category": "Furniture",
+    "image_url": "/media/img/Furniture/dining table set - Buy wooden 4 seater dining table furniture online Medium Walnutprice 21999.jfif",
+    "stock": 5
+  },
+  {
+    "id": 28,
+    "name": "Grey Rope 4 Seater Sofa Set With Table And",
+    "price": 54999,
+    "description": "High-quality curated grey rope 4 seater sofa set with table and for your home and lifestyle.",
+    "category": "Furniture",
+    "image_url": "/media/img/Furniture/Grey Rope 4 Seater Sofa Set With Table And Cream Color Cushions price 54999.jfif",
+    "stock": 23
+  },
+  {
+    "id": 29,
+    "name": "L Shape Furniture Sofa Set",
+    "price": 6500,
+    "description": "For Home, Living Room in Mumbai at",
+    "category": "Furniture",
+    "image_url": "/media/img/Furniture/L Shape Furniture Sofa Set, For Home, Living Room in Mumbai at price 6,500 Set MOQ5 Set by Rizvi Sofa Center - Justdial.jfif",
+    "stock": 23
+  },
+  {
+    "id": 30,
+    "name": "FAB Home Decor Modern 3D Circle Metal Wall",
+    "price": 990,
+    "description": "Creative Handmade for Home",
+    "category": "Home Decor",
+    "image_url": "/media/img/Home Decor/Buy FAB Home Decor Modern 3D Circle Metal Wall Art Decorations, Creative Handmade for Home price 990.jfif",
+    "stock": 23
+  },
+  {
+    "id": 31,
+    "name": "Mummy Shop Polyresin Set of 2 Deer Showpiece",
+    "price": 350,
+    "description": "Parties",
+    "category": "Home Decor",
+    "image_url": "/media/img/Home Decor/Buy Mummy Shop Polyresin Set of 2 Dear showpiece for Home Decoration Items Table Décor Living Room Gift Boxes for Weddings, Parties price 350.jfif",
+    "stock": 7
+  },
+  {
+    "id": 32,
+    "name": "Decor Accessory Online - Premium Decor Object",
+    "price": 599,
+    "description": "Nestasia",
+    "category": "Home Decor",
+    "image_url": "/media/img/Home Decor/Decor Accessory Online - Premium Decor Object  Nestasia price 599.jfif",
+    "stock": 5
+  },
+  {
+    "id": 33,
+    "name": "Gift and Décor Buy Home Décor Gift Products Online",
+    "price": 690,
+    "description": "High-quality curated gift and décor buy home décor gift products online for your home and lifestyle.",
+    "category": "Home Decor",
+    "image_url": "/media/img/Home Decor/Gift and Décor Buy Home Décor Gift Products Online price 690.jfif",
+    "stock": 8
+  },
+  {
+    "id": 34,
+    "name": "Macrame Wall Hanging Decor",
+    "price": 259,
+    "description": "Home Decor, Wall Shelves, Wall Hangings for Home Decoration, Wall",
+    "category": "Home Decor",
+    "image_url": "/media/img/Home Decor/Macrame Wall Hanging Decor, Home Decor, Wall Shelves, Wall Hangings for Home Decoration, Wall price 259.jfif",
+    "stock": 9
+  },
+  {
+    "id": 35,
+    "name": "Wood Table Lamp",
+    "price": 1099,
+    "description": "Modern Base Fabric Lampshade for Home Office Cafe Restaurant, Carved Pot Multicolour",
+    "category": "Home Decor",
+    "image_url": "/media/img/Home Decor/Wood Table Lamp, Modern Base Fabric Lampshade for Home Office Cafe Restaurant, Carved Pot Multicolour price 1099.jfif",
+    "stock": 16
+  },
+  {
+    "id": 36,
+    "name": "EasyCook 12 Piece Silicone Cooking Set",
+    "price": 1799,
+    "description": "High-quality curated easycook 12 piece silicone cooking set for your home and lifestyle.",
+    "category": "Kitchen Essentials",
+    "image_url": "/media/img/kitchen essentials/EasyCook 12 Piece Silicone Cooking Set price 1799.jfif",
+    "stock": 6
+  },
+  {
+    "id": 37,
+    "name": "HAVAI 4 Tier Square Rolling Kitchen Storage Rack",
+    "price": 599,
+    "description": "Sturdy",
+    "category": "Kitchen Essentials",
+    "image_url": "/media/img/kitchen essentials/HAVAI 4 Tier Square Rolling Kitchen Storage Rack  Sturdy price 599.jfif",
+    "stock": 17
+  },
+  {
+    "id": 38,
+    "name": "Kitchen Jewel Plus Cookware Set (Milton",
+    "price": 1833,
+    "description": "High-quality curated kitchen jewel plus cookware set (milton for your home and lifestyle.",
+    "category": "Kitchen Essentials",
+    "image_url": "/media/img/kitchen essentials/Kitchen Jewel Plus Cookware Set (Milton Procook) Peach 5 Pcs Set price1833.jfif",
+    "stock": 6
+  },
+  {
+    "id": 39,
+    "name": "KuchePro 12-Piece Silicone Kitchen Utensil Set",
+    "price": 623,
+    "description": "Premium",
+    "category": "Kitchen Essentials",
+    "image_url": "/media/img/kitchen essentials/KuchePro 12-Piece Silicone Kitchen Utensil Set - Premium price 623.jfif",
+    "stock": 15
+  },
+  {
+    "id": 40,
+    "name": "Triply Cookware Set With Kadai Frying Pan",
+    "price": 2957,
+    "description": "High-quality curated triply cookware set with kadai frying pan for your home and lifestyle.",
+    "category": "Kitchen Essentials",
+    "image_url": "/media/img/kitchen essentials/Triply Cookware Set With Kadai Frying Pan And Sauce Pan price 2957.jfif",
+    "stock": 24
+  },
+  {
+    "id": 41,
+    "name": "Vinod Cookware Kitchen In The Box Cookware Set",
+    "price": 10332,
+    "description": "25 Pieces",
+    "category": "Kitchen Essentials",
+    "image_url": "/media/img/kitchen essentials/Vinod Cookware Kitchen In The Box Cookware Set - 25 Pieces price 10332.jfif",
+    "stock": 20
+  },
+  {
+    "id": 42,
+    "name": "Almirah",
+    "price": 19990,
+    "description": "Wooden Cupboard Home Storage Cabinet",
+    "category": "Storage and Space",
+    "image_url": "/media/img/storage and space/Almirah  Wooden Cupboard Home Storage Cabinet price 19990.jfif",
+    "stock": 8
+  },
+  {
+    "id": 43,
+    "name": "GAURI-3 MODEL",
+    "price": 20300,
+    "description": "Triveni Almirah Triveni Almirah",
+    "category": "Storage and Space",
+    "image_url": "/media/img/storage and space/GAURI-3 MODEL  Triveni Almirah Triveni Almirah price 20300.jfif",
+    "stock": 6
+  },
+  {
+    "id": 44,
+    "name": "Heart Home 8 Units Storage Cabinet Organizer",
+    "price": 5200,
+    "description": "High-quality curated heart home 8 units storage cabinet organizer for your home and lifestyle.",
+    "category": "Storage and Space",
+    "image_url": "/media/img/storage and space/Heart Home 8 Units Storage Cabinet Organizer 5 plus 3 Drawerrpice 5200.jfif",
+    "stock": 21
+  },
+  {
+    "id": 45,
+    "name": "HOME CUBE 4 Layer Metal Storage Rack with",
+    "price": 2300,
+    "description": "High-quality curated home cube 4 layer metal storage rack with for your home and lifestyle.",
+    "category": "Storage and Space",
+    "image_url": "/media/img/storage and space/HOME CUBE 4 Layer Metal Storage Rack with Adjustable price 2300.jfif",
+    "stock": 5
+  },
+  {
+    "id": 46,
+    "name": "HOMESTIC 3 Units Multipurpose Large Cupboard",
+    "price": 299,
+    "description": "High-quality curated homestic 3 units multipurpose large cupboard for your home and lifestyle.",
+    "category": "Storage and Space",
+    "image_url": "/media/img/storage and space/HOMESTIC 3 Units Multipurpose Large Cupboard Storage Box for price 299.jfif",
+    "stock": 6
+  }
+]

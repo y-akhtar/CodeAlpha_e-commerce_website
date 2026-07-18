@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picksy | Home Essentials & Decor</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/media/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html" class="logo-wrapper">
+                    <img src="/media/logo.png" alt="Picksy" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li id="account-link" class="hidden"><a href="profile.html" class="nav-link">Account</a></li>
+                    <li id="auth-link"><a href="login.html" class="nav-link">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count hidden">0</span>
+                </a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper">
+        
+        <section class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <span class="hero-subtitle">Classy. Minimal. Beautiful.</span>
+                    <h1 class="hero-title">Curated Essentials for Your Cozy Living</h1>
+                    <p class="hero-desc">We gather high-quality furniture, decor, and bedroom essentials to create spaces that elevate your everyday routine.</p>
+                    <div class="hero-buttons">
+                        <a href="shop.html" class="btn btn-primary btn-large">Explore Shop <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="#categories" class="btn btn-outline btn-large">Categories</a>
+                    </div>
+                </div>
+                <div class="hero-banner-container">
+                    <img src="/media/img/Bedroom essentials/Shop Brass Antique Curved Floor Lamp with Table Shelf  price 7456.jfif" alt="Curated Lamp Decor" class="hero-banner-img">
+                </div>
+            </div>
+        </section>
+
+        <section class="categories-section container" id="categories">
+            <div class="section-header text-center">
+                <h2>Browse by Category</h2>
+                <p>Find the perfect items for your rooms</p>
+            </div>
+            <div class="category-grid" id="category-list">
+                
+            </div>
+        </section>
+
+        <section class="products-section container">
+            <div class="section-header flex-header">
+                <div>
+                    <h2>Featured Products</h2>
+                    <p>Our top selections for this season</p>
+                </div>
+                <a href="shop.html" class="btn btn-text">View All <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            
+            <div class="product-grid" id="featured-list">
+                
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">PICKSY<span>.</span></span>
+                <p>High-quality, elegant, and minimal home accessories. Simple products for a better life.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Catalog</a></li>
+                    <li><a href="cart.html">Shopping Bag</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact" id="contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 100 Minimalist Ave, India</p>
+                <p><i class="fa-solid fa-envelope"></i> picksy100@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Picksy. All rights reserved. | <a href="about.html#policy">Privacy Policy</a> | <a href="about.html#terms">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategories();
+            loadFeaturedProducts();
+        });
+
+        async function loadCategories() {
+            try {
+                const res = await fetch('/api/categories');
+                const categories = await res.json();
+                const list = document.getElementById('category-list');
+                list.innerHTML = '';
+                
+                // Map category names to icons
+                const iconMap = {
+                    'Bathroom Essentials': 'fa-bath',
+                    'Bedroom Essentials': 'fa-bed',
+                    'Furniture': 'fa-chair',
+                    'Home Decor': 'fa-couch',
+                    'Kitchen Essentials': 'fa-utensils',
+                    'Storage and Space': 'fa-boxes-stacked'
+                };
+
+                categories.forEach(cat => {
+                    const icon = iconMap[cat] || 'fa-tag';
+                    const card = document.createElement('div');
+                    card.className = 'category-card';
+                    card.onclick = () => window.location.href = `shop.html?category=${encodeURIComponent(cat)}`;
+                    card.innerHTML = `
+                        <div class="category-icon"><i class="fa-solid ${icon}"></i></div>
+                        <h3>${cat}</h3>
+                    `;
+                    list.appendChild(card);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function loadFeaturedProducts() {
+            try {
+                const res = await fetch('/api/products');
+                const products = await res.json();
+                const list = document.getElementById('featured-list');
+                list.innerHTML = '';
+
+                // Get first 4 products as featured
+                const featured = products.slice(0, 4);
+
+                featured.forEach(prod => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <div class="product-image-box">
+                            <img src="${prod.image_url}" alt="${prod.name}" class="product-img">
+                            <div class="product-card-overlay">
+                                <a href="product.html?id=${prod.id}" class="card-btn" title="View Detail"><i class="fa-solid fa-eye"></i></a>
+                                <div class="card-btn" title="Add to Cart" onclick="addToCart(${prod.id}, '${prod.name.replace(/'/g, "\\'")}', ${prod.price}, '${prod.image_url}', 1, ${prod.stock})">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-cat">${prod.category}</span>
+                            <h3 class="product-title"><a href="product.html?id=${prod.id}">${prod.name}</a></h3>
+                            <div class="product-card-footer">
+                                <span class="product-price">${formatPrice(prod.price)}</span>
+                                <span class="stock-tag ${prod.stock > 0 ? 'in-stock' : 'out-stock'}">${prod.stock > 0 ? 'In Stock' : 'Out of Stock'}</span>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    </script>
+</body>
+</html>

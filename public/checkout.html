@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picksy | Checkout</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/media/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <a href="javascript:history.back()" class="mobile-back-btn" title="Go Back"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="index.html" class="logo-wrapper">
+                    <img src="/media/logo.png" alt="Picksy" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li id="account-link" class="hidden"><a href="profile.html" class="nav-link">Account</a></li>
+                    <li id="auth-link"><a href="login.html" class="nav-link">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count hidden">0</span>
+                </a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper container py-12">
+        <h1 class="mb-8"><i class="fa-solid fa-credit-card" style="color: var(--color-primary);"></i> Checkout</h1>
+
+        <div id="checkout-container">
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">PICKSY<span>.</span></span>
+                <p>High-quality, elegant, and minimal home accessories. Simple products for a better life.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Catalog</a></li>
+                    <li><a href="cart.html">Shopping Bag</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact" id="contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 100 Minimalist Ave, India</p>
+                <p><i class="fa-solid fa-envelope"></i> picksy100@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Picksy. All rights reserved. | <a href="about.html#policy">Privacy Policy</a> | <a href="about.html#terms">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCheckoutPage();
+        });
+
+        function renderCheckoutPage() {
+            const container = document.getElementById('checkout-container');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <h2>Your Cart is Empty</h2>
+                        <p class="text-muted mt-2">Cannot check out with an empty shopping bag.</p>
+                        <a href="shop.html" class="btn btn-primary mt-6">Go to Shop</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const subtotal = getCartTotal();
+            const shipping = subtotal >= 2000 ? 0 : 150;
+            const total = subtotal + shipping;
+
+            // Prepare prefilled user fields if logged in
+            let firstNameVal = '';
+            let lastNameVal = '';
+            let emailVal = '';
+
+            if (user) {
+                firstNameVal = user.first_name || '';
+                lastNameVal = user.last_name || '';
+                emailVal = user.email || '';
+            }
+
+            let summaryItemsHTML = '';
+            cart.forEach(item => {
+                summaryItemsHTML += `
+                    <div class="checkout-summary-row">
+                        <span class="text-muted">${item.name} <strong>x ${item.quantity}</strong></span>
+                        <span style="font-weight: 500;">${formatPrice(item.price * item.quantity)}</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = `
+                <div class="checkout-layout">
+                    
+                    <div class="checkout-form-box">
+                        <h2 class="form-title">Shipping Address & Contact</h2>
+                        <form id="checkout-form" onsubmit="processCheckout(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="first_name">First Name *</label>
+                                    <input type="text" id="first_name" class="form-control" value="${firstNameVal}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Last Name *</label>
+                                    <input type="text" id="last_name" class="form-control" value="${lastNameVal}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" class="form-control" value="${emailVal}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" class="form-control" placeholder="10-digit mobile number" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Shipping Street Address *</label>
+                                <textarea id="address" class="form-control" rows="3" placeholder="Apartment, house number, street, locality" required></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City *</label>
+                                    <input type="text" id="city" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zip_code">ZIP / Postal Code *</label>
+                                    <input type="text" id="zip_code" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="payment-method-card">
+                                <h3>Payment Method</h3>
+                                <div class="payment-radio-group mt-3">
+                                    <input type="radio" id="cod" name="payment_option" value="cod" checked>
+                                    <label for="cod">
+                                        <strong>Cash on Delivery (Pay on Collection)</strong>
+                                        <p class="text-muted" style="font-size: 12px; margin-top: 4px;">Pay securely in cash or card when the shipping agent delivers the package to your doorstep.</p>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-large btn-full mt-6" id="submit-order-btn">
+                                Place Order (Pay on Delivery) <i class="fa-solid fa-circle-check"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="cart-summary-box">
+                        <h3 class="summary-title">Your Order Summary</h3>
+                        
+                        <div class="checkout-summary-list">
+                            ${summaryItemsHTML}
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>${formatPrice(subtotal)}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>${shipping === 0 ? '<span class="text-success">Free</span>' : formatPrice(shipping)}</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-row summary-row-total">
+                            <span>Total</span>
+                            <span>${formatPrice(total)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function processCheckout(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-order-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Processing your order... <i class="fa-solid fa-spinner fa-spin"></i>';
+
+            // Gather inputs
+            const payload = {
+                first_name: document.getElementById('first_name').value.trim(),
+                last_name: document.getElementById('last_name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                address: document.getElementById('address').value.trim(),
+                city: document.getElementById('city').value.trim(),
+                zip_code: document.getElementById('zip_code').value.trim(),
+                total_price: getCartTotal() + (getCartTotal() >= 2000 ? 0 : 150),
+                user_id: user ? user.id : null,
+                items: cart.map(item => ({
+                    product_id: item.id,
+                    price: item.price,
+                    quantity: item.quantity
+                }))
+            };
+
+            try {
+                const res = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || "Failed to process order.");
+                }
+
+                // Success
+                clearCart();
+                renderSuccessState(data.id || data.order_id || 'PKS-' + Math.floor(Math.random() * 90000) + 10000);
+            } catch (err) {
+                showToast(err.message, 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Place Order (Pay on Delivery) <i class="fa-solid fa-circle-check"></i>';
+            }
+        }
+
+        function renderSuccessState(orderId) {
+            const container = document.getElementById('checkout-container');
+            container.innerHTML = `
+                <div class="empty-state" style="padding: 48px; border-style: solid; border-color: var(--color-border); max-width: 500px; margin: 0 auto;">
+                    <i class="fa-solid fa-circle-check" style="color: var(--color-success); font-size: 56px;"></i>
+                    <h2 class="mt-4">Order Placed Successfully!</h2>
+                    <p class="text-muted mt-2">Thank you for shopping with Picksy. Your order number is <strong>#${orderId}</strong>.</p>
+                    <div style="background-color: var(--color-bg-cream); text-align: left; padding: 16px; border-radius: var(--radius-sm); font-size: 13px; margin: 24px 0; border: 1px dashed var(--color-border);">
+                        <p style="margin-bottom: 6px;"><strong>Payment Mode:</strong> Cash on Delivery (COD)</p>
+                        <p style="margin-bottom: 6px;"><strong>Delivery Timeline:</strong> 3-5 Working Days</p>
+                        <p>A shipping confirmation email has been dispatched to your address.</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+                        ${user ? '<a href="profile.html" class="btn btn-outline">View Order History</a>' : ''}
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

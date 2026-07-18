@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picksy | About Us & Policies</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/media/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <a href="javascript:history.back()" class="mobile-back-btn" title="Go Back"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="index.html" class="logo-wrapper">
+                    <img src="/media/logo.png" alt="Picksy" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="about.html" class="nav-link active">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li id="account-link" class="hidden"><a href="profile.html" class="nav-link">Account</a></li>
+                    <li id="auth-link"><a href="login.html" class="nav-link">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count hidden">0</span>
+                </a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper container py-12" style="max-width: 800px;">
+        
+        <section id="about" class="py-12" style="border-bottom: 1px solid var(--color-border);">
+            <h1 class="mb-4"><i class="fa-solid fa-circle-info" style="color: var(--color-primary); margin-right: 8px;"></i> About Picksy</h1>
+            <p class="hero-desc" style="font-size: 16px; margin-bottom: 24px;">Welcome to Picksy, your cozy corner for curated home essentials and minimal styling decor.</p>
+            <p class="mb-4">Founded in 2026, Picksy was born out of a simple idea: that home accessories should be simple, functional, and classy. We believe in soft pastel tones, clean lines, and high-quality materials that transform any living space into a relaxing sanctuary.</p>
+            <p class="mb-4">Whether you are organizing your workspace, decorating a bedroom, or stocking your kitchen, we supply objects that represent harmony and comfort. Thank you for inviting Picksy into your home.</p>
+        </section>
+
+        <section id="policy" class="py-12" style="border-bottom: 1px solid var(--color-border);">
+            <h2 class="mb-4" style="font-size: 24px;"><i class="fa-solid fa-shield-halved" style="color: var(--color-primary); margin-right: 8px;"></i> Privacy Policy</h2>
+            <p class="text-muted">Last Updated: July 16, 2026</p>
+            
+            <div class="mt-6">
+                <h3 class="mb-4" style="font-size: 18px;">1. Information We Collect</h3>
+                <p class="mb-4">We collect standard information necessary to process your e-commerce orders, including your name, shipping address, email address, phone number, and purchase histories.</p>
+                
+                <h3 class="mb-4" style="font-size: 18px;">2. How We Use Your Data</h3>
+                <p class="mb-4">Your collected contact details are used strictly to coordinate shipping and delivery dispatch. We do not sell, rent, or lease our customer databases to marketing agencies.</p>
+                
+                <h3 class="mb-4" style="font-size: 18px;">3. Cookies & Session Cache</h3>
+                <p class="mb-4">Picksy uses client-side localStorage to remember your active shopping bag contents and login session keys. No tracking trackers or telemetry files are injected.</p>
+            </div>
+        </section>
+
+        <section id="terms" class="py-12">
+            <h2 class="mb-4" style="font-size: 24px;"><i class="fa-solid fa-file-contract" style="color: var(--color-primary); margin-right: 8px;"></i> Terms & Conditions</h2>
+            <p class="text-muted">Last Updated: July 16, 2026</p>
+            
+            <div class="mt-6">
+                <h3 class="mb-4" style="font-size: 18px;">1. Order Purchases & Stocks</h3>
+                <p class="mb-4">By placing a Cash on Delivery (COD) order, you agree to inspect and settle the invoice in cash or card upon product arrival. Items are subject to availability, and we reserve the right to cancel orders if stock limits are exceeded.</p>
+                
+                <h3 class="mb-4" style="font-size: 18px;">2. Pricing Accuracy</h3>
+                <p class="mb-4">All prices listed reflect Indian Rupees (Rs.) inclusive of local sales taxes. Shipping charges (Rs. 150 flat) apply to orders under Rs. 2,000, and are free for orders exceeding this limit.</p>
+                
+                <h3 class="mb-4" style="font-size: 18px;">3. Exchange & Return Timelines</h3>
+                <p class="mb-4">Customers are eligible to claim a product replacement or refund return within 7 working days of order collection. Items must remain unused in their original packing boxes.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">PICKSY<span>.</span></span>
+                <p>High-quality, elegant, and minimal home accessories. Simple products for a better life.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Catalog</a></li>
+                    <li><a href="cart.html">Shopping Bag</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact" id="contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 100 Minimalist Ave, India</p>
+                <p><i class="fa-solid fa-envelope"></i> picksy100@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Picksy. All rights reserved. | <a href="#policy">Privacy Policy</a> | <a href="#terms">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

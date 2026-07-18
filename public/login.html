@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picksy | Log In</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/media/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <a href="javascript:history.back()" class="mobile-back-btn" title="Go Back"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="index.html" class="logo-wrapper">
+                    <img src="/media/logo.png" alt="Picksy" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li id="account-link" class="hidden"><a href="profile.html" class="nav-link">Account</a></li>
+                    <li id="auth-link"><a href="login.html" class="nav-link active">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count hidden">0</span>
+                </a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper container auth-wrapper">
+        <div class="auth-card">
+            <h2 class="auth-title">Welcome Back</h2>
+            <p class="text-muted">Log in to track orders and save your delivery details.</p>
+            
+            <form id="login-form" onsubmit="handleLogin(event)" class="mt-6">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                    <div style="text-align: right; margin-top: 6px;">
+                        <a href="forgot-password.html" class="btn-text" style="font-size: 12px;">Forgot Password?</a>
+                    </div>
+                </div>
+                
+                <button type="submit" id="login-btn" class="btn btn-primary btn-large btn-full mt-4">
+                    Log In <i class="fa-solid fa-right-to-bracket"></i>
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center" style="font-size: 13px;">
+                <span class="text-muted">New to Picksy?</span>
+                <a href="register.html" class="btn-text">Create an Account</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">PICKSY<span>.</span></span>
+                <p>High-quality, elegant, and minimal home accessories. Simple products for a better life.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Catalog</a></li>
+                    <li><a href="cart.html">Shopping Bag</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact" id="contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 100 Minimalist Ave, India</p>
+                <p><i class="fa-solid fa-envelope"></i> picksy100@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Picksy. All rights reserved. | <a href="about.html#policy">Privacy Policy</a> | <a href="about.html#terms">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('login-btn');
+            btn.disabled = true;
+            btn.innerHTML = 'Logging you in... <i class="fa-solid fa-spinner fa-spin"></i>';
+
+            const payload = {
+                email: document.getElementById('email').value.trim(),
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || "Failed to log in.");
+                }
+
+                // Save session
+                localStorage.setItem('picksy_user', JSON.stringify(data.user));
+                localStorage.setItem('picksy_session', JSON.stringify(data.session));
+                
+                user = data.user;
+                session = data.session;
+                
+                showToast("Logged in successfully!", "success");
+                
+                setTimeout(() => {
+                    // Check if redirect next URL is specified
+                    const next = new URLSearchParams(window.location.search).get('next');
+                    window.location.href = next || 'index.html';
+                }, 1000);
+
+            } catch (err) {
+                showToast(err.message, "error");
+                btn.disabled = false;
+                btn.innerHTML = 'Log In <i class="fa-solid fa-right-to-bracket"></i>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picksy | Sign Up</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/media/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <a href="javascript:history.back()" class="mobile-back-btn" title="Go Back"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="index.html" class="logo-wrapper">
+                    <img src="/media/logo.png" alt="Picksy" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li id="account-link" class="hidden"><a href="profile.html" class="nav-link">Account</a></li>
+                    <li id="auth-link"><a href="login.html" class="nav-link active">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count hidden">0</span>
+                </a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper container auth-wrapper">
+        <div class="auth-card auth-card-wide" id="auth-card-wrapper">
+            
+            <div id="signup-view">
+                <h2 class="auth-title">Create Account</h2>
+                <p class="text-muted">Sign up to save details and log order histories.</p>
+                
+                <form id="register-form" onsubmit="handleRegister(event)" class="mt-6">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" class="form-control" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" class="form-control" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" class="form-control" placeholder="Min. 6 characters" minlength="6" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Min. 6 characters" minlength="6" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="register-btn" class="btn btn-primary btn-large btn-full mt-4">
+                        Create Account <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                </form>
+                
+                <div class="mt-6 text-center" style="font-size: 13px;">
+                    <span class="text-muted">Already have an account?</span>
+                    <a href="login.html" class="btn-text">Log In Here</a>
+                </div>
+            </div>
+
+            <div id="otp-view" class="hidden">
+                <h2 class="auth-title">Verify Your Email</h2>
+                <p class="text-muted mt-2">We sent a 6-digit verification code to <strong id="otp-target-email">your email</strong>. Please enter the code below to complete your registration.</p>
+                
+                <form id="otp-form" onsubmit="handleVerifyOTP(event)" class="mt-6">
+                    <div class="form-group">
+                        <label for="otpCode" style="text-align: center; display: block; font-weight: 600; margin-bottom: 8px;">Verification Code (6-digit OTP)</label>
+                        <input type="text" id="otpCode" class="form-control" placeholder="••••••" maxlength="6" pattern="\d{6}" style="text-align: center; font-size: 24px; letter-spacing: 8px; font-weight: 700; max-width: 250px; margin: 0 auto;" required>
+                    </div>
+                    
+                    <button type="submit" id="verify-btn" class="btn btn-primary btn-large btn-full mt-6">
+                        Verify & Create Account <i class="fa-solid fa-circle-check"></i>
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center" style="font-size: 13px; display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                    <div>
+                        <span class="text-muted">Didn't receive the code?</span>
+                        <button onclick="resendOTP(event)" id="resend-btn" class="btn-text" style="background: none; border: none; font-family: inherit; font-size: inherit; cursor: pointer;">Resend Verification Code</button>
+                    </div>
+                    <button onclick="showSignupView(event)" class="btn-text" style="background: none; border: none; font-family: inherit; font-size: inherit; color: var(--color-text-muted); cursor: pointer; text-decoration: underline;"><i class="fa-solid fa-arrow-left"></i> Change Email / Go Back</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">PICKSY<span>.</span></span>
+                <p>High-quality, elegant, and minimal home accessories. Simple products for a better life.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Catalog</a></li>
+                    <li><a href="cart.html">Shopping Bag</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact" id="contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 100 Minimalist Ave, India</p>
+                <p><i class="fa-solid fa-envelope"></i> picksy100@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Picksy. All rights reserved. | <a href="about.html#policy">Privacy Policy</a> | <a href="about.html#terms">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        let pendingEmail = '';
+        let pendingRegData = null;
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+
+            if (password !== confirm) {
+                showToast("Passwords do not match.", "error");
+                return;
+            }
+
+            const btn = document.getElementById('register-btn');
+            btn.disabled = true;
+            btn.innerHTML = 'Sending verification code... <i class="fa-solid fa-spinner fa-spin"></i>';
+
+            const payload = { email, password, firstName, lastName };
+            pendingRegData = payload; // save for resend function
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || "Failed to initiate registration.");
+                }
+
+                // Show OTP Verification view
+                pendingEmail = email;
+                document.getElementById('otp-target-email').textContent = email;
+                document.getElementById('signup-view').classList.add('hidden');
+                document.getElementById('otp-view').classList.remove('hidden');
+                document.getElementById('otpCode').value = '';
+                
+                showToast("Verification code dispatched to your email!", "success");
+
+            } catch (err) {
+                showToast(err.message, "error");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Create Account <i class="fa-solid fa-user-plus"></i>';
+            }
+        }
+
+        async function handleVerifyOTP(e) {
+            e.preventDefault();
+            
+            const otpCode = document.getElementById('otpCode').value.trim();
+            if (otpCode.length !== 6) {
+                showToast("Please enter a valid 6-digit verification code.", "error");
+                return;
+            }
+
+            const btn = document.getElementById('verify-btn');
+            btn.disabled = true;
+            btn.innerHTML = 'Verifying code... <i class="fa-solid fa-spinner fa-spin"></i>';
+
+            try {
+                const res = await fetch('/api/auth/verify-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: pendingEmail, otp: otpCode })
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || "Invalid verification code.");
+                }
+
+                showToast("Email verified and account created successfully!", "success");
+                
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+
+            } catch (err) {
+                showToast(err.message, "error");
+                btn.disabled = false;
+                btn.innerHTML = 'Verify & Create Account <i class="fa-solid fa-circle-check"></i>';
+            }
+        }
+
+        async function resendOTP(e) {
+            e.preventDefault();
+            if (!pendingRegData) return;
+
+            const btn = document.getElementById('resend-btn');
+            btn.disabled = true;
+            btn.innerHTML = 'Sending...';
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(pendingRegData)
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error || "Failed to resend code.");
+                }
+
+                showToast("A new verification code has been dispatched!", "success");
+            } catch (err) {
+                showToast(err.message, "error");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Resend Verification Code';
+            }
+        }
+
+        function showSignupView(e) {
+            e.preventDefault();
+            document.getElementById('otp-view').classList.add('hidden');
+            document.getElementById('signup-view').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

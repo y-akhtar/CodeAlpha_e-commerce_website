@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picksy | Shop Products</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/media/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <a href="javascript:history.back()" class="mobile-back-btn" title="Go Back"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="index.html" class="logo-wrapper">
+                    <img src="/media/logo.png" alt="Picksy" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link active">Shop</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li id="account-link" class="hidden"><a href="profile.html" class="nav-link">Account</a></li>
+                    <li id="auth-link"><a href="login.html" class="nav-link">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count hidden">0</span>
+                </a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper container">
+        
+        <section class="py-12">
+            <h1 id="shop-title">Shop All Collections</h1>
+            <p class="text-muted">Discover functional and beautifully designed accessories for your home.</p>
+            
+            <div class="search-bar-wrapper mt-6">
+                <form id="search-form" onsubmit="handleSearch(event)">
+                    <div class="search-input-box">
+                        <input type="text" id="search-input" placeholder="Search product name...">
+                        <button type="submit" class="search-icon-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div class="categories-explorer mt-4">
+            <div class="category-nav-bar" id="horizontal-categories">
+                
+            </div>
+        </div>
+
+        <div class="shop-main">
+            <div class="product-grid" id="shop-product-list">
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">PICKSY<span>.</span></span>
+                <p>High-quality, elegant, and minimal home accessories. Simple products for a better life.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Catalog</a></li>
+                    <li><a href="cart.html">Shopping Bag</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact" id="contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 100 Minimalist Ave, India</p>
+                <p><i class="fa-solid fa-envelope"></i> picksy100@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Picksy. All rights reserved. | <a href="about.html#policy">Privacy Policy</a> | <a href="about.html#terms">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        let currentCategory = new URLSearchParams(window.location.search).get('category') || '';
+        let searchQuery = new URLSearchParams(window.location.search).get('q') || '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('search-input').value = searchQuery;
+            loadHorizontalCategories();
+            loadShopProducts();
+        });
+
+        async function loadHorizontalCategories() {
+            try {
+                const res = await fetch('/api/categories');
+                const categories = await res.json();
+                const container = document.getElementById('horizontal-categories');
+                
+                container.innerHTML = `
+                    <button onclick="filterCategory('')" class="category-pill ${!currentCategory ? 'active' : ''}">All Categories</button>
+                `;
+
+                categories.forEach(cat => {
+                    const isActive = currentCategory.toLowerCase() === cat.toLowerCase();
+                    const btn = document.createElement('button');
+                    btn.className = `category-pill ${isActive ? 'active' : ''}`;
+                    btn.onclick = () => filterCategory(cat);
+                    btn.textContent = cat;
+                    container.appendChild(btn);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function loadShopProducts() {
+            try {
+                let url = '/api/products?';
+                if (currentCategory) url += `category=${encodeURIComponent(currentCategory)}&`;
+                if (searchQuery) url += `search=${encodeURIComponent(searchQuery)}`;
+
+                const res = await fetch(url);
+                const products = await res.json();
+                const list = document.getElementById('shop-product-list');
+                
+                // Update Title Header
+                const titleHeader = document.getElementById('shop-title');
+                titleHeader.textContent = currentCategory ? `${currentCategory} Collection` : 'Shop All Collections';
+
+                if (products.length === 0) {
+                    list.innerHTML = `
+                        <div class="empty-state w-full col-span-3" style="grid-column: span 3;">
+                            <i class="fa-solid fa-box-open"></i>
+                            <h2>No Products Found</h2>
+                            <p class="text-muted mt-2">We couldn't find any products matching your selection.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                list.innerHTML = '';
+                products.forEach(prod => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <div class="product-image-box">
+                            <img src="${prod.image_url}" alt="${prod.name}" class="product-img">
+                            <div class="product-card-overlay">
+                                <a href="product.html?id=${prod.id}" class="card-btn" title="View Detail"><i class="fa-solid fa-eye"></i></a>
+                                <div class="card-btn" title="Add to Cart" onclick="addToCart(${prod.id}, '${prod.name.replace(/'/g, "\\'")}', ${prod.price}, '${prod.image_url}', 1, ${prod.stock})">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-cat">${prod.category}</span>
+                            <h3 class="product-title"><a href="product.html?id=${prod.id}">${prod.name}</a></h3>
+                            <div class="product-card-footer">
+                                <span class="product-price">${formatPrice(prod.price)}</span>
+                                <span class="stock-tag ${prod.stock > 0 ? 'in-stock' : 'out-stock'}">${prod.stock > 0 ? 'In Stock' : 'Out of Stock'}</span>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            
+            // Reload grid
+            loadShopProducts();
+            
+            // Re-render categories bar active status
+            loadHorizontalCategories();
+            
+            // Update URL without reloading page
+            const newUrl = new URL(window.location);
+            if (cat) {
+                newUrl.searchParams.set('category', cat);
+            } else {
+                newUrl.searchParams.delete('category');
+            }
+            window.history.pushState({}, '', newUrl);
+        }
+
+        function handleSearch(e) {
+            e.preventDefault();
+            searchQuery = document.getElementById('search-input').value.trim();
+            loadShopProducts();
+
+            const newUrl = new URL(window.location);
+            if (searchQuery) {
+                newUrl.searchParams.set('q', searchQuery);
+            } else {
+                newUrl.searchParams.delete('q');
+            }
+            window.history.pushState({}, '', newUrl);
+        }
+    </script>
+</body>
+</html>

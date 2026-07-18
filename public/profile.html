@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picksy | My Account</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/media/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <a href="javascript:history.back()" class="mobile-back-btn" title="Go Back"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="index.html" class="logo-wrapper">
+                    <img src="/media/logo.png" alt="Picksy" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li id="account-link" class="hidden"><a href="profile.html" class="nav-link active">Account</a></li>
+                    <li id="auth-link"><a href="login.html" class="nav-link">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count hidden">0</span>
+                </a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper container py-12">
+        <h1 class="mb-8"><i class="fa-solid fa-circle-user" style="color: var(--color-primary);"></i> My Account Dashboard</h1>
+
+        <div class="profile-layout" id="profile-layout-container">
+            
+            <p class="text-center text-muted">Checking authentication status...</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">PICKSY<span>.</span></span>
+                <p>High-quality, elegant, and minimal home accessories. Simple products for a better life.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Catalog</a></li>
+                    <li><a href="cart.html">Shopping Bag</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact" id="contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 100 Minimalist Ave, India</p>
+                <p><i class="fa-solid fa-envelope"></i> picksy100@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Picksy. All rights reserved. | <a href="about.html#policy">Privacy Policy</a> | <a href="about.html#terms">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!user) {
+                showToast("Please log in to access your profile.", "warning");
+                setTimeout(() => {
+                    window.location.href = 'login.html?next=profile.html';
+                }, 1000);
+                return;
+            }
+            renderProfile();
+        });
+
+        async function renderProfile() {
+            const container = document.getElementById('profile-layout-container');
+            const initials = ((user.first_name || 'U').substring(0, 1) + (user.last_name || '').substring(0, 1)).toUpperCase();
+            
+            container.innerHTML = `
+                
+                <div class="profile-card">
+                    <div class="profile-avatar">${initials}</div>
+                    <h2 class="profile-name">${user.first_name || 'User'} ${user.last_name || ''}</h2>
+                    <p class="profile-email">${user.email}</p>
+                    <p class="text-muted mt-2" style="font-size: 12px;">Customer Account</p>
+                    
+                    <button onclick="logoutUser(event)" class="btn btn-outline btn-full mt-6" style="border-color: var(--color-error); color: var(--color-error)">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+
+                <div class="order-history-box">
+                    <h2 class="form-title">Order History Log</h2>
+                    <div id="orders-list-container" class="orders-list">
+                        <p class="text-center text-muted">Retrieving past orders...</p>
+                    </div>
+                </div>
+            `;
+
+            loadOrders();
+        }
+
+        async function loadOrders() {
+            const listContainer = document.getElementById('orders-list-container');
+            try {
+                // Fetch orders for user. Use both ID and email as query keys
+                const res = await fetch(`/api/orders/my-orders?user_id=${user.id}&email=${encodeURIComponent(user.email)}`);
+                const orders = await res.json();
+                
+                if (!res.ok) {
+                    throw new Error(orders.error || "Failed to load order history.");
+                }
+
+                if (orders.length === 0) {
+                    listContainer.innerHTML = `
+                        <div class="no-orders-box text-center py-12" style="background-color: var(--color-bg-cream); border-radius: var(--radius-sm); border: 1px dashed var(--color-border);">
+                            <i class="fa-solid fa-receipt fa-3x text-muted" style="margin-bottom: 12px; display: block;"></i>
+                            <p class="text-muted">You haven't placed any orders yet.</p>
+                            <a href="shop.html" class="btn btn-primary mt-4">Start Shopping</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                listContainer.innerHTML = '';
+                orders.forEach(order => {
+                    let itemsHTML = '';
+                    
+                    // Supabase returns items array populated, Local fallback returns item objects list
+                    const items = order.items || [];
+                    
+                    items.forEach(item => {
+                        // Supabase items reference product table name, local stores inline string name
+                        const name = item.product ? item.product.name : (item.name || `Product ID: ${item.product_id}`);
+                        itemsHTML += `
+                            <li class="order-card-item">
+                                <span>${name} <strong>&times; ${item.quantity}</strong></span>
+                                <span>${formatPrice(item.price * item.quantity)}</span>
+                            </li>
+                        `;
+                    });
+
+                    const dateStr = new Date(order.created_at).toLocaleDateString('en-IN', {
+                        year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                    });
+
+                    const card = document.createElement('div');
+                    card.className = 'order-card';
+                    card.innerHTML = `
+                        <div class="order-card-header">
+                            <div>
+                                <span class="order-id">Order #${order.id}</span>
+                                <span class="order-date">${dateStr}</span>
+                            </div>
+                            <span class="order-badge order-badge-${(order.status || 'Pending').toLowerCase()}">${order.status || 'Pending'}</span>
+                        </div>
+                        
+                        <div style="margin: 12px 0;">
+                            <ul class="order-card-items">
+                                ${itemsHTML}
+                            </ul>
+                        </div>
+                        
+                        <div class="order-card-footer">
+                            <span class="text-muted">Ship to: <strong>${order.address}, ${order.city}</strong></span>
+                            <span style="font-weight: 700;">Total Paid: <span style="color: var(--color-primary);">${formatPrice(order.total_price)}</span></span>
+                        </div>
+                    `;
+                    listContainer.appendChild(card);
+                });
+            } catch (err) {
+                console.error(err);
+                listContainer.innerHTML = `<p class="text-center text-error">Failed to retrieve orders: ${err.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

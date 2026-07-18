@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picksy | Product Details</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/media/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div style="display: flex; align-items: center;">
+                <a href="javascript:history.back()" class="mobile-back-btn" title="Go Back"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="index.html" class="logo-wrapper">
+                    <img src="/media/logo.png" alt="Picksy" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li id="account-link" class="hidden"><a href="profile.html" class="nav-link">Account</a></li>
+                    <li id="auth-link"><a href="login.html" class="nav-link">Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="cart.html" class="action-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count hidden">0</span>
+                </a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-wrapper container py-12">
+        <div id="product-detail-container">
+            
+            <p class="text-center text-muted">Loading product details...</p>
+        </div>
+
+        <section class="products-section mt-16">
+            <div class="section-header">
+                <h2>Similar Products</h2>
+                <p>Curated recommendations you might love</p>
+            </div>
+            
+            <div class="product-grid" id="similar-list">
+                
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">PICKSY<span>.</span></span>
+                <p>High-quality, elegant, and minimal home accessories. Simple products for a better life.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Catalog</a></li>
+                    <li><a href="cart.html">Shopping Bag</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-contact" id="contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 100 Minimalist Ave, India</p>
+                <p><i class="fa-solid fa-envelope"></i> picksy100@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Picksy. All rights reserved. | <a href="about.html#policy">Privacy Policy</a> | <a href="about.html#terms">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        const productId = new URLSearchParams(window.location.search).get('id');
+        let product = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!productId) {
+                document.getElementById('product-detail-container').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <h2>Missing Product</h2>
+                        <p class="text-muted">No product ID was specified in the page parameters.</p>
+                        <a href="shop.html" class="btn btn-primary mt-4">Back to Shop</a>
+                    </div>
+                `;
+                return;
+            }
+            loadProductDetails();
+        });
+
+        async function loadProductDetails() {
+            try {
+                const res = await fetch(`/api/products/${productId}`);
+                if (!res.ok) {
+                    throw new Error("Product not found");
+                }
+                product = await res.json();
+                
+                // Set page title
+                document.title = `Picksy | ${product.name}`;
+
+                const container = document.getElementById('product-detail-container');
+                container.innerHTML = `
+                    
+                    <div class="breadcrumb" style="display: flex; gap: 8px; font-size: 13px; color: var(--color-text-muted); margin-bottom: 24px;">
+                        <a href="index.html">Home</a>
+                        <i class="fa-solid fa-chevron-right" style="font-size: 9px; align-self: center;"></i>
+                        <a href="shop.html">Shop</a>
+                        <i class="fa-solid fa-chevron-right" style="font-size: 9px; align-self: center;"></i>
+                        <a href="shop.html?category=${encodeURIComponent(product.category)}">${product.category}</a>
+                        <i class="fa-solid fa-chevron-right" style="font-size: 9px; align-self: center;"></i>
+                        <span style="color: var(--color-text-dark);">${product.name}</span>
+                    </div>
+
+                    <div class="detail-layout">
+                        <div class="detail-img-box">
+                            <img src="${product.image_url}" alt="${product.name}">
+                        </div>
+                        <div class="detail-info-panel">
+                            <span class="detail-cat-badge">${product.category}</span>
+                            <h1 class="detail-name">${product.name}</h1>
+                            
+                            <div class="detail-price-row">
+                                <span class="detail-price-value">${formatPrice(product.price)}</span>
+                                <span class="detail-stock-badge ${product.stock > 0 ? 'in-stock' : 'out-stock'}">
+                                    <i class="fa-solid fa-circle" style="font-size: 8px; margin-right: 4px;"></i> 
+                                    ${product.stock > 0 ? `In Stock (${product.stock} units)` : 'Out of Stock'}
+                                </span>
+                            </div>
+
+                            <div class="detail-divider"></div>
+
+                            <div class="detail-desc">
+                                <h3>Product Details</h3>
+                                <p>${product.description}</p>
+                            </div>
+
+                            <div class="detail-divider"></div>
+
+                            ${product.stock > 0 ? `
+                                <div class="flex" style="gap: 16px; align-items: center;">
+                                    <div class="quantity-stepper">
+                                        <button class="stepper-btn" onclick="adjustQty(-1)"><i class="fa-solid fa-minus"></i></button>
+                                        <input type="number" id="qty-input" value="1" min="1" max="${product.stock}" readonly>
+                                        <button class="stepper-btn" onclick="adjustQty(1)"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                    <button class="btn btn-primary btn-large" style="flex-grow: 1;" onclick="triggerAddToCart()">
+                                        <i class="fa-solid fa-cart-plus"></i> Add to Shopping Bag
+                                    </button>
+                                </div>
+                            ` : `
+                                <button class="btn btn-secondary btn-large btn-full" disabled>Sold Out</button>
+                            `}
+
+                            <div class="sidebar-widget mt-8" style="background-color: var(--color-bg-cream); border: none; padding: 16px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                                    <span style="font-weight: 600; color: var(--color-text-muted);">Delivery</span>
+                                    <span>Cash on Delivery available</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                                    <span style="font-weight: 600; color: var(--color-text-muted);">Returns</span>
+                                    <span>Easy 7-day exchange policy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                loadSimilarProducts(product.category);
+            } catch (err) {
+                console.error(err);
+                document.getElementById('product-detail-container').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <h2>Failed to Load</h2>
+                        <p class="text-muted">${err.message}</p>
+                        <a href="shop.html" class="btn btn-primary mt-4">Back to Shop</a>
+                    </div>
+                `;
+            }
+        }
+
+        function adjustQty(amount) {
+            const input = document.getElementById('qty-input');
+            let current = parseInt(input.value, 10);
+            const max = parseInt(input.max, 10);
+            
+            current += amount;
+            if (current < 1) current = 1;
+            if (current > max) current = max;
+            input.value = current;
+        }
+
+        function triggerAddToCart() {
+            const qty = parseInt(document.getElementById('qty-input').value, 10);
+            addToCart(product.id, product.name, product.price, product.image_url, qty, product.stock);
+        }
+
+        async function loadSimilarProducts(category) {
+            try {
+                const res = await fetch(`/api/products?category=${encodeURIComponent(category)}`);
+                const products = await res.json();
+                const list = document.getElementById('similar-list');
+                list.innerHTML = '';
+
+                // Exclude current product
+                const similar = products.filter(p => p.id !== parseInt(productId, 10)).slice(0, 4);
+
+                if (similar.length === 0) {
+                    list.innerHTML = '<p class="text-muted w-full col-span-4 text-center">No similar products available.</p>';
+                    return;
+                }
+
+                similar.forEach(prod => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <div class="product-image-box">
+                            <img src="${prod.image_url}" alt="${prod.name}" class="product-img">
+                            <div class="product-card-overlay">
+                                <a href="product.html?id=${prod.id}" class="card-btn" title="View Detail"><i class="fa-solid fa-eye"></i></a>
+                                <div class="card-btn" title="Add to Cart" onclick="addToCart(${prod.id}, '${prod.name.replace(/'/g, "\\'")}', ${prod.price}, '${prod.image_url}', 1, ${prod.stock})">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-cat">${prod.category}</span>
+                            <h3 class="product-title"><a href="product.html?id=${prod.id}">${prod.name}</a></h3>
+                            <div class="product-card-footer">
+                                <span class="product-price">${formatPrice(prod.price)}</span>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    </script>
+</body>
+</html>
