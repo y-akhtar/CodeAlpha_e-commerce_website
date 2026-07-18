@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Local Environment Credentials
+.env
+
+# Local Databases
+database.sqlite
+
+# OS Metadata
+.DS_Store
+Thumbs.db
